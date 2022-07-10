@@ -13,22 +13,25 @@ func PostSearch(search *searchv1.Search)  (*searchv1.SearchResponse, error){
 
 	//Req body 
 	now := time.Now()
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second * 10)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-
-
+	
+	
 	//Conx
 	searchServiceConnnection, err := utils.GetSearchConnection()
 
 	if err != nil {
-		log.Fatal("Fail obtaining searchServiceConnection")
+		log.Fatal("Fail obtaining searchServiceConnection 1")
 		return nil, err
 	}
 
 	searchResult, err := searchServiceConnnection.PostSearch(ctx, search)
 
 	if err != nil {
-		log.Fatal("Fail obtaining searchServiceConnection")
+		log.Fatal(err.Error())
+
+		log.Fatal("Fail obtaining searchServiceConnection 2 - 1")
+		log.Fatal("error")
 		return searchResult, err
 	}
 
